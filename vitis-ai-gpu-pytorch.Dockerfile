@@ -1,103 +1,106 @@
-FROM pytorch/pytorch:1.12.1-cuda11.3-cudnn8-devel
+FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-devel
 
-RUN apt-get update -y 
-RUN apt install -y --no-install-recommends apt-transport-https 
-RUN apt install -y --no-install-recommends autoconf 
-RUN apt install -y --no-install-recommends automake 
-RUN apt install -y --no-install-recommends bc 
-RUN apt install -y --no-install-recommends build-essential 
-RUN apt install -y --no-install-recommends bzip2 
-RUN apt install -y --no-install-recommends ca-certificates 
-RUN apt install -y --no-install-recommends curl 
-RUN apt install -y --no-install-recommends g++ 
-RUN apt install -y --no-install-recommends gdb 
-RUN apt install -y --no-install-recommends git 
-RUN apt install -y --no-install-recommends gnupg 
-RUN apt install -y --no-install-recommends locales 
-RUN ln -fs /usr/share/zoneinfo/Europe/Ljubljana /etc/localtime
-RUN apt install -y --no-install-recommends tzdata
-RUN apt install -y --no-install-recommends libboost-all-dev 
-RUN apt install -y --no-install-recommends libgflags-dev 
-RUN apt install -y --no-install-recommends libgoogle-glog-dev 
-RUN apt install -y --no-install-recommends libgtest-dev 
-RUN apt install -y --no-install-recommends libjsoncpp-dev 
-RUN apt install -y --no-install-recommends libssl-dev 
-RUN apt install -y --no-install-recommends libtool 
-RUN apt install -y --no-install-recommends libunwind-dev 
-RUN apt install -y --no-install-recommends make 
-RUN apt install -y --no-install-recommends openssh-client 
-RUN apt install -y --no-install-recommends openssl 
-RUN apt install -y --no-install-recommends python3 
-RUN apt install -y --no-install-recommends python3-dev 
-RUN apt install -y --no-install-recommends python3-minimal 
-RUN apt install -y --no-install-recommends python3-numpy 
-RUN apt install -y --no-install-recommends python3-opencv 
-RUN apt install -y --no-install-recommends python3-pip 
-RUN apt install -y --no-install-recommends python3-setuptools 
-RUN apt install -y --no-install-recommends python3-venv 
-RUN apt install -y --no-install-recommends software-properties-common 
-RUN apt install -y --no-install-recommends sudo 
-RUN apt install -y --no-install-recommends tree 
-RUN apt install -y --no-install-recommends unzip 
-RUN apt install -y --no-install-recommends vim 
-RUN apt install -y --no-install-recommends wget 
-RUN apt install -y --no-install-recommends yasm 
-RUN apt install -y --no-install-recommends zstd 
-RUN apt install -y --no-install-recommends libavcodec-dev 
-RUN apt install -y --no-install-recommends libavformat-dev 
-RUN apt install -y --no-install-recommends libeigen3-dev 
-RUN apt install -y --no-install-recommends libgstreamer-plugins-base1.0-dev 
-RUN apt install -y --no-install-recommends libgstreamer1.0-dev 
-RUN apt install -y --no-install-recommends libgtest-dev 
-RUN apt install -y --no-install-recommends libgtk-3-dev 
-RUN apt install -y --no-install-recommends libgtk2.0-dev 
-RUN apt install -y --no-install-recommends libhdf5-dev 
-RUN apt install -y --no-install-recommends libjpeg-dev 
-RUN apt install -y --no-install-recommends libopenexr-dev 
-RUN apt install -y --no-install-recommends libpng-dev 
-RUN apt install -y --no-install-recommends libswscale-dev 
-RUN apt install -y --no-install-recommends libtiff-dev 
-RUN apt install -y --no-install-recommends libwebp-dev 
-RUN apt install -y --no-install-recommends opencl-clhpp-headers 
-RUN apt install -y --no-install-recommends opencl-headers 
-RUN apt install -y --no-install-recommends pocl-opencl-icd 
-RUN apt install -y --no-install-recommends python3-opencv 
-RUN apt install -y --no-install-recommends python3-pip 
-RUN apt install -y --no-install-recommends python3-setuptools 
-RUN apt install -y --no-install-recommends python3-venv 
-RUN apt install -y --no-install-recommends software-properties-common 
-RUN apt install -y --no-install-recommends sudo 
-RUN apt install -y --no-install-recommends tree 
-RUN apt install -y --no-install-recommends unzip 
-RUN apt install -y --no-install-recommends vim 
-RUN apt install -y --no-install-recommends wget 
-RUN apt install -y --no-install-recommends yasm 
-RUN apt install -y --no-install-recommends zstd 
-RUN apt install -y --no-install-recommends libavcodec-dev 
-RUN apt install -y --no-install-recommends libavformat-dev 
-RUN apt install -y --no-install-recommends libeigen3-dev 
-RUN apt install -y --no-install-recommends libgstreamer-plugins-base1.0-dev 
-RUN apt install -y --no-install-recommends libgstreamer1.0-dev 
-RUN apt install -y --no-install-recommends libgtest-dev 
-RUN apt install -y --no-install-recommends libgtk-3-dev 
-RUN apt install -y --no-install-recommends libgtk2.0-dev 
-RUN apt install -y --no-install-recommends libhdf5-dev 
-RUN apt install -y --no-install-recommends libjpeg-dev 
-RUN apt install -y --no-install-recommends libopenexr-dev 
-RUN apt install -y --no-install-recommends libpng-dev 
-RUN apt install -y --no-install-recommends libswscale-dev 
-RUN apt install -y --no-install-recommends libtiff-dev 
-RUN apt install -y --no-install-recommends libwebp-dev 
-RUN apt install -y --no-install-recommends opencl-clhpp-headers 
-RUN apt install -y --no-install-recommends opencl-headers 
-RUN apt install -y --no-install-recommends ffmpeg 
-RUN apt install -y --no-install-recommends pocl-opencl-icd 
-RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
-RUN apt update
-RUN apt install -y --no-install-recommends g++-11
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 30
-RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 30
-RUN update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-11 30 
+RUN rm /etc/apt/sources.list.d/cuda.list \
+ && rm /etc/apt/sources.list.d/nvidia-ml.list
+RUN apt-get update -y \
+ && apt install -y --no-install-recommends apt-transport-https \
+ && apt install -y --no-install-recommends autoconf \
+ && apt install -y --no-install-recommends automake \
+ && apt install -y --no-install-recommends bc \
+ && apt install -y --no-install-recommends build-essential \
+ && apt install -y --no-install-recommends bzip2 \
+ && apt install -y --no-install-recommends ca-certificates \
+ && apt install -y --no-install-recommends curl \
+ && apt install -y --no-install-recommends g++ \
+ && apt install -y --no-install-recommends gdb \
+ && apt install -y --no-install-recommends git \
+ && apt install -y --no-install-recommends gnupg \
+ && apt install -y --no-install-recommends locales \
+ && ln -fs /usr/share/zoneinfo/Europe/Ljubljana /etc/localtime \
+ && apt install -y --no-install-recommends tzdata \
+ && apt install -y --no-install-recommends libboost-all-dev \
+ && apt install -y --no-install-recommends libgflags-dev \
+ && apt install -y --no-install-recommends libgoogle-glog-dev \
+ && apt install -y --no-install-recommends libgtest-dev \
+ && apt install -y --no-install-recommends libjsoncpp-dev \ 
+ && apt install -y --no-install-recommends libssl-dev \
+ && apt install -y --no-install-recommends libtool \
+ && apt install -y --no-install-recommends libunwind-dev \
+ && apt install -y --no-install-recommends make \
+ && apt install -y --no-install-recommends openssh-client \
+ && apt install -y --no-install-recommends openssl \
+ && apt install -y --no-install-recommends python3 \
+ && apt install -y --no-install-recommends python3-dev \
+ && apt install -y --no-install-recommends python3-minimal \
+ && apt install -y --no-install-recommends python3-numpy \
+ && apt install -y --no-install-recommends python3-opencv \
+ && apt install -y --no-install-recommends python3-pip \
+ && apt install -y --no-install-recommends python3-setuptools \
+ && apt install -y --no-install-recommends python3-venv \
+ && apt install -y --no-install-recommends software-properties-common \
+ && apt install -y --no-install-recommends sudo \
+ && apt install -y --no-install-recommends tree \
+ && apt install -y --no-install-recommends unzip \
+ && apt install -y --no-install-recommends vim \
+ && apt install -y --no-install-recommends wget \
+ && apt install -y --no-install-recommends yasm \
+ && apt install -y --no-install-recommends zstd \
+ && apt install -y --no-install-recommends libavcodec-dev \
+ && apt install -y --no-install-recommends libavformat-dev \
+ && apt install -y --no-install-recommends libeigen3-dev \
+ && apt install -y --no-install-recommends libgstreamer-plugins-base1.0-dev \
+ && apt install -y --no-install-recommends libgstreamer1.0-dev \
+ && apt install -y --no-install-recommends libgtest-dev \
+ && apt install -y --no-install-recommends libgtk-3-dev \
+ && apt install -y --no-install-recommends libgtk2.0-dev \
+ && apt install -y --no-install-recommends libhdf5-dev \
+ && apt install -y --no-install-recommends libjpeg-dev \
+ && apt install -y --no-install-recommends libopenexr-dev \
+ && apt install -y --no-install-recommends libpng-dev \
+ && apt install -y --no-install-recommends libswscale-dev \
+ && apt install -y --no-install-recommends libtiff-dev \
+ && apt install -y --no-install-recommends libwebp-dev \
+ && apt install -y --no-install-recommends opencl-clhpp-headers \
+ && apt install -y --no-install-recommends opencl-headers \
+ && apt install -y --no-install-recommends pocl-opencl-icd \
+ && apt install -y --no-install-recommends python3-opencv \
+ && apt install -y --no-install-recommends python3-pip \
+ && apt install -y --no-install-recommends python3-setuptools \
+ && apt install -y --no-install-recommends python3-venv \
+ && apt install -y --no-install-recommends software-properties-common \
+ && apt install -y --no-install-recommends sudo \
+ && apt install -y --no-install-recommends tree \
+ && apt install -y --no-install-recommends unzip \
+ && apt install -y --no-install-recommends vim \
+ && apt install -y --no-install-recommends wget \
+ && apt install -y --no-install-recommends yasm \
+ && apt install -y --no-install-recommends zstd \
+ && apt install -y --no-install-recommends libavcodec-dev \
+ && apt install -y --no-install-recommends libavformat-dev \
+ && apt install -y --no-install-recommends libeigen3-dev \
+ && apt install -y --no-install-recommends libgstreamer-plugins-base1.0-dev \
+ && apt install -y --no-install-recommends libgstreamer1.0-dev \
+ && apt install -y --no-install-recommends libgtest-dev \
+ && apt install -y --no-install-recommends libgtk-3-dev \
+ && apt install -y --no-install-recommends libgtk2.0-dev \
+ && apt install -y --no-install-recommends libhdf5-dev \
+ && apt install -y --no-install-recommends libjpeg-dev \
+ && apt install -y --no-install-recommends libopenexr-dev \
+ && apt install -y --no-install-recommends libpng-dev \
+ && apt install -y --no-install-recommends libswscale-dev \
+ && apt install -y --no-install-recommends libtiff-dev \
+ && apt install -y --no-install-recommends libwebp-dev \
+ && apt install -y --no-install-recommends opencl-clhpp-headers \
+ && apt install -y --no-install-recommends opencl-headers \
+ && apt install -y --no-install-recommends ffmpeg \
+ && apt install -y --no-install-recommends pocl-opencl-icd 
+
+RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test \
+ && apt update \
+ && apt install -y --no-install-recommends g++-11 \
+ && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 30 \
+ && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 30 \
+ && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-11 30 
 
 RUN cd /tmp \
     && wget https://github.com/Kitware/CMake/releases/download/v3.28.4/cmake-3.28.4.tar.gz \
@@ -224,9 +227,23 @@ RUN cd /tmp; git clone --depth 1 --branch v2.5.0 https://github.com/pybind/pybin
     && chmod 777 /usr/lib/python3/dist-packages
 
 RUN /workspace/Vitis-AI/src/vai_runtime/unilog/cmake.sh --clean
-RUN /workspace/Vitis-AI/src/vai_runtime/xir/cmake.sh --clean
-RUN /workspace/Vitis-AI/src/vai_runtime/target_factory/cmake.sh --clean
+RUN /workspace/Vitis-AI/src/vai_runtime/xir/cmake.sh --clean --build-python
+RUN /workspace/Vitis-AI/src/vai_runtime/target_factory/cmake.sh --clean --cmake-options=-DBUILD_PYTHON=ON
 #RUN /workspace/Vitis-AI/src/vai_runtime/vart/cmake.sh --clean
+
 ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 RUN cd /workspace/Vitis-AI/src/vai_quantizer/vai_q_pytorch/pytorch_binding && python setup.py bdist_wheel -d . && pip install ./pytorch_nndct-*.whl 
-ENV CUDA_HOME=/usr/local/cuda 
+ENV CUDA_HOME=/usr/local/cuda
+RUN cd /tmp && wget -O conda-channel.tar.gz https://www.xilinx.com/bin/public/openDownload?filename=conda-channel-3.0.tar.gz
+RUN cd /tmp && tar -xvzf conda-channel.tar.gz
+RUN  conda config --env --append channels file:///tmp/conda-channel \
+  && conda install -y -c conda-forge gxx_linux-64==11.1.0 \
+  && conda install -y -n base --override-channels -c conda-forge mamba 'python_abi=*=*cp*'
+RUN sed -i "s/- pip://g" /workspace/Vitis-AI/docker/conda/gpu_conda/vitis-ai-pytorch.yml \
+ && sed -i "s/- pip//g" /workspace/Vitis-AI/docker/conda/gpu_conda/vitis-ai-pytorch.yml \
+ && sed -i "s/- ck//g" /workspace/Vitis-AI/docker/conda/gpu_conda/vitis-ai-pytorch.yml \
+ && sed -i "s/- orderedset//g" /workspace/Vitis-AI/docker/conda/gpu_conda/vitis-ai-pytorch.yml \
+ && sed -i "s/- opencv-contrib-python//g" /workspace/Vitis-AI/docker/conda/gpu_conda/vitis-ai-pytorch.yml
+RUN mamba env update -f /workspace/Vitis-AI/docker/conda/gpu_conda/vitis-ai-pytorch.yml
+RUN conda init
+#RUN conda activate vitis-ai-pytorch
